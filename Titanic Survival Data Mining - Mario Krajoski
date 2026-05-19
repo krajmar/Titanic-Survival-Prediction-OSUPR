@@ -3,21 +3,21 @@
   {
    "cell_type": "code",
    "execution_count": 1,
-   "id": "52d8b459",
+   "id": "b7e5ad06",
    "metadata": {
     "_cell_guid": "b1076dfc-b9ad-4769-8c92-a6c4dae69d19",
     "_uuid": "8f2839f25d086af736a60e9eeb907d3b93b6e0e5",
     "execution": {
-     "iopub.execute_input": "2026-05-19T12:56:58.107506Z",
-     "iopub.status.busy": "2026-05-19T12:56:58.107231Z",
-     "iopub.status.idle": "2026-05-19T12:56:59.306727Z",
-     "shell.execute_reply": "2026-05-19T12:56:59.305468Z"
+     "iopub.execute_input": "2026-05-19T13:01:25.310886Z",
+     "iopub.status.busy": "2026-05-19T13:01:25.310399Z",
+     "iopub.status.idle": "2026-05-19T13:01:26.451864Z",
+     "shell.execute_reply": "2026-05-19T13:01:26.449604Z"
     },
     "papermill": {
-     "duration": 1.204494,
-     "end_time": "2026-05-19T12:56:59.308681+00:00",
+     "duration": 1.148952,
+     "end_time": "2026-05-19T13:01:26.454682+00:00",
      "exception": false,
-     "start_time": "2026-05-19T12:56:58.104187+00:00",
+     "start_time": "2026-05-19T13:01:25.305730+00:00",
      "status": "completed"
     },
     "tags": []
@@ -27,11 +27,11 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
+      "/kaggle/input/datasets/mariokrajoski/titanic/train.csv\n",
+      "/kaggle/input/datasets/mariokrajoski/titanic/test.csv\n",
       "/kaggle/input/competitions/titanic/train.csv\n",
       "/kaggle/input/competitions/titanic/test.csv\n",
-      "/kaggle/input/competitions/titanic/gender_submission.csv\n",
-      "/kaggle/input/datasets/mariokrajoski/titanic/train.csv\n",
-      "/kaggle/input/datasets/mariokrajoski/titanic/test.csv\n"
+      "/kaggle/input/competitions/titanic/gender_submission.csv\n"
      ]
     }
    ],
@@ -58,19 +58,19 @@
   {
    "cell_type": "code",
    "execution_count": 2,
-   "id": "e9616cbe",
+   "id": "a18df2b4",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-05-19T12:56:59.312824Z",
-     "iopub.status.busy": "2026-05-19T12:56:59.312397Z",
-     "iopub.status.idle": "2026-05-19T12:56:59.419427Z",
-     "shell.execute_reply": "2026-05-19T12:56:59.418539Z"
+     "iopub.execute_input": "2026-05-19T13:01:26.462039Z",
+     "iopub.status.busy": "2026-05-19T13:01:26.461221Z",
+     "iopub.status.idle": "2026-05-19T13:01:26.547239Z",
+     "shell.execute_reply": "2026-05-19T13:01:26.545927Z"
     },
     "papermill": {
-     "duration": 0.110733,
-     "end_time": "2026-05-19T12:56:59.420836+00:00",
+     "duration": 0.092349,
+     "end_time": "2026-05-19T13:01:26.549595+00:00",
      "exception": false,
-     "start_time": "2026-05-19T12:56:59.310103+00:00",
+     "start_time": "2026-05-19T13:01:26.457246+00:00",
      "status": "completed"
     },
     "tags": []
@@ -232,49 +232,53 @@
   {
    "cell_type": "code",
    "execution_count": 3,
-   "id": "b239921f",
+   "id": "bbbfb5bf",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-05-19T12:56:59.426300Z",
-     "iopub.status.busy": "2026-05-19T12:56:59.425402Z",
-     "iopub.status.idle": "2026-05-19T12:56:59.438292Z",
-     "shell.execute_reply": "2026-05-19T12:56:59.437524Z"
+     "iopub.execute_input": "2026-05-19T13:01:26.555282Z",
+     "iopub.status.busy": "2026-05-19T13:01:26.554951Z",
+     "iopub.status.idle": "2026-05-19T13:01:26.570517Z",
+     "shell.execute_reply": "2026-05-19T13:01:26.569595Z"
     },
     "papermill": {
-     "duration": 0.017508,
-     "end_time": "2026-05-19T12:56:59.440085+00:00",
+     "duration": 0.02108,
+     "end_time": "2026-05-19T13:01:26.572802+00:00",
      "exception": false,
-     "start_time": "2026-05-19T12:56:59.422577+00:00",
+     "start_time": "2026-05-19T13:01:26.551722+00:00",
      "status": "completed"
     },
     "tags": []
    },
    "outputs": [],
    "source": [
-    "#Fill missing data for columns Age and Embarked\n",
+    "# Fill missing numerical values with median\n",
     "train[\"Age\"] = train[\"Age\"].fillna(train[\"Age\"].median())\n",
     "test[\"Age\"] = test[\"Age\"].fillna(test[\"Age\"].median())\n",
     "\n",
+    "train[\"Fare\"] = train[\"Fare\"].fillna(train[\"Fare\"].median())\n",
+    "test[\"Fare\"] = test[\"Fare\"].fillna(test[\"Fare\"].median())\n",
+    "\n",
+    "# Fill missing categorical values with mode\n",
     "train[\"Embarked\"] = train[\"Embarked\"].fillna(train[\"Embarked\"].mode()[0])\n",
-    "test[\"Fare\"] = test[\"Fare\"].fillna(test[\"Fare\"].median())"
+    "test[\"Embarked\"] = test[\"Embarked\"].fillna(test[\"Embarked\"].mode()[0])"
    ]
   },
   {
    "cell_type": "code",
    "execution_count": 4,
-   "id": "e784d210",
+   "id": "5d1b352d",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-05-19T12:56:59.444653Z",
-     "iopub.status.busy": "2026-05-19T12:56:59.444339Z",
-     "iopub.status.idle": "2026-05-19T12:56:59.456350Z",
-     "shell.execute_reply": "2026-05-19T12:56:59.455556Z"
+     "iopub.execute_input": "2026-05-19T13:01:26.578546Z",
+     "iopub.status.busy": "2026-05-19T13:01:26.578161Z",
+     "iopub.status.idle": "2026-05-19T13:01:26.594251Z",
+     "shell.execute_reply": "2026-05-19T13:01:26.593075Z"
     },
     "papermill": {
-     "duration": 0.016493,
-     "end_time": "2026-05-19T12:56:59.458177+00:00",
+     "duration": 0.021591,
+     "end_time": "2026-05-19T13:01:26.596346+00:00",
      "exception": false,
-     "start_time": "2026-05-19T12:56:59.441684+00:00",
+     "start_time": "2026-05-19T13:01:26.574755+00:00",
      "status": "completed"
     },
     "tags": []
@@ -469,14 +473,14 @@
   },
   "papermill": {
    "default_parameters": {},
-   "duration": 4.886155,
-   "end_time": "2026-05-19T12:56:59.880883+00:00",
+   "duration": 5.31784,
+   "end_time": "2026-05-19T13:01:27.017610+00:00",
    "environment_variables": {},
    "exception": null,
    "input_path": "__notebook__.ipynb",
    "output_path": "__notebook__.ipynb",
    "parameters": {},
-   "start_time": "2026-05-19T12:56:54.994728+00:00",
+   "start_time": "2026-05-19T13:01:21.699770+00:00",
    "version": "2.7.0"
   }
  },
