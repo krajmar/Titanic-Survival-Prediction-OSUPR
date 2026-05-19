@@ -3,21 +3,21 @@
   {
    "cell_type": "code",
    "execution_count": 1,
-   "id": "60726edd",
+   "id": "52d8b459",
    "metadata": {
     "_cell_guid": "b1076dfc-b9ad-4769-8c92-a6c4dae69d19",
     "_uuid": "8f2839f25d086af736a60e9eeb907d3b93b6e0e5",
     "execution": {
-     "iopub.execute_input": "2026-05-19T12:52:51.997237Z",
-     "iopub.status.busy": "2026-05-19T12:52:51.996896Z",
-     "iopub.status.idle": "2026-05-19T12:52:53.068745Z",
-     "shell.execute_reply": "2026-05-19T12:52:53.067762Z"
+     "iopub.execute_input": "2026-05-19T12:56:58.107506Z",
+     "iopub.status.busy": "2026-05-19T12:56:58.107231Z",
+     "iopub.status.idle": "2026-05-19T12:56:59.306727Z",
+     "shell.execute_reply": "2026-05-19T12:56:59.305468Z"
     },
     "papermill": {
-     "duration": 1.077378,
-     "end_time": "2026-05-19T12:52:53.070762+00:00",
+     "duration": 1.204494,
+     "end_time": "2026-05-19T12:56:59.308681+00:00",
      "exception": false,
-     "start_time": "2026-05-19T12:52:51.993384+00:00",
+     "start_time": "2026-05-19T12:56:58.104187+00:00",
      "status": "completed"
     },
     "tags": []
@@ -58,19 +58,19 @@
   {
    "cell_type": "code",
    "execution_count": 2,
-   "id": "aead4273",
+   "id": "e9616cbe",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-05-19T12:52:53.075132Z",
-     "iopub.status.busy": "2026-05-19T12:52:53.074709Z",
-     "iopub.status.idle": "2026-05-19T12:52:53.147366Z",
-     "shell.execute_reply": "2026-05-19T12:52:53.146396Z"
+     "iopub.execute_input": "2026-05-19T12:56:59.312824Z",
+     "iopub.status.busy": "2026-05-19T12:56:59.312397Z",
+     "iopub.status.idle": "2026-05-19T12:56:59.419427Z",
+     "shell.execute_reply": "2026-05-19T12:56:59.418539Z"
     },
     "papermill": {
-     "duration": 0.07724,
-     "end_time": "2026-05-19T12:52:53.149466+00:00",
+     "duration": 0.110733,
+     "end_time": "2026-05-19T12:56:59.420836+00:00",
      "exception": false,
-     "start_time": "2026-05-19T12:52:53.072226+00:00",
+     "start_time": "2026-05-19T12:56:59.310103+00:00",
      "status": "completed"
     },
     "tags": []
@@ -228,6 +228,204 @@
     "\n",
     "train.head()"
    ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "b239921f",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-05-19T12:56:59.426300Z",
+     "iopub.status.busy": "2026-05-19T12:56:59.425402Z",
+     "iopub.status.idle": "2026-05-19T12:56:59.438292Z",
+     "shell.execute_reply": "2026-05-19T12:56:59.437524Z"
+    },
+    "papermill": {
+     "duration": 0.017508,
+     "end_time": "2026-05-19T12:56:59.440085+00:00",
+     "exception": false,
+     "start_time": "2026-05-19T12:56:59.422577+00:00",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "#Fill missing data for columns Age and Embarked\n",
+    "train[\"Age\"] = train[\"Age\"].fillna(train[\"Age\"].median())\n",
+    "test[\"Age\"] = test[\"Age\"].fillna(test[\"Age\"].median())\n",
+    "\n",
+    "train[\"Embarked\"] = train[\"Embarked\"].fillna(train[\"Embarked\"].mode()[0])\n",
+    "test[\"Fare\"] = test[\"Fare\"].fillna(test[\"Fare\"].median())"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "e784d210",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-05-19T12:56:59.444653Z",
+     "iopub.status.busy": "2026-05-19T12:56:59.444339Z",
+     "iopub.status.idle": "2026-05-19T12:56:59.456350Z",
+     "shell.execute_reply": "2026-05-19T12:56:59.455556Z"
+    },
+    "papermill": {
+     "duration": 0.016493,
+     "end_time": "2026-05-19T12:56:59.458177+00:00",
+     "exception": false,
+     "start_time": "2026-05-19T12:56:59.441684+00:00",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>PassengerId</th>\n",
+       "      <th>Survived</th>\n",
+       "      <th>Pclass</th>\n",
+       "      <th>Name</th>\n",
+       "      <th>Sex</th>\n",
+       "      <th>Age</th>\n",
+       "      <th>SibSp</th>\n",
+       "      <th>Parch</th>\n",
+       "      <th>Ticket</th>\n",
+       "      <th>Fare</th>\n",
+       "      <th>Cabin</th>\n",
+       "      <th>Embarked</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>1</td>\n",
+       "      <td>0</td>\n",
+       "      <td>3</td>\n",
+       "      <td>Braund, Mr. Owen Harris</td>\n",
+       "      <td>male</td>\n",
+       "      <td>22.0</td>\n",
+       "      <td>1</td>\n",
+       "      <td>0</td>\n",
+       "      <td>A/5 21171</td>\n",
+       "      <td>7.2500</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>S</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>2</td>\n",
+       "      <td>1</td>\n",
+       "      <td>1</td>\n",
+       "      <td>Cumings, Mrs. John Bradley (Florence Briggs Th...</td>\n",
+       "      <td>female</td>\n",
+       "      <td>38.0</td>\n",
+       "      <td>1</td>\n",
+       "      <td>0</td>\n",
+       "      <td>PC 17599</td>\n",
+       "      <td>71.2833</td>\n",
+       "      <td>C85</td>\n",
+       "      <td>C</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>3</td>\n",
+       "      <td>1</td>\n",
+       "      <td>3</td>\n",
+       "      <td>Heikkinen, Miss. Laina</td>\n",
+       "      <td>female</td>\n",
+       "      <td>26.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>STON/O2. 3101282</td>\n",
+       "      <td>7.9250</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>S</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>4</td>\n",
+       "      <td>1</td>\n",
+       "      <td>1</td>\n",
+       "      <td>Futrelle, Mrs. Jacques Heath (Lily May Peel)</td>\n",
+       "      <td>female</td>\n",
+       "      <td>35.0</td>\n",
+       "      <td>1</td>\n",
+       "      <td>0</td>\n",
+       "      <td>113803</td>\n",
+       "      <td>53.1000</td>\n",
+       "      <td>C123</td>\n",
+       "      <td>S</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>5</td>\n",
+       "      <td>0</td>\n",
+       "      <td>3</td>\n",
+       "      <td>Allen, Mr. William Henry</td>\n",
+       "      <td>male</td>\n",
+       "      <td>35.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>373450</td>\n",
+       "      <td>8.0500</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>S</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "   PassengerId  Survived  Pclass  \\\n",
+       "0            1         0       3   \n",
+       "1            2         1       1   \n",
+       "2            3         1       3   \n",
+       "3            4         1       1   \n",
+       "4            5         0       3   \n",
+       "\n",
+       "                                                Name     Sex   Age  SibSp  \\\n",
+       "0                            Braund, Mr. Owen Harris    male  22.0      1   \n",
+       "1  Cumings, Mrs. John Bradley (Florence Briggs Th...  female  38.0      1   \n",
+       "2                             Heikkinen, Miss. Laina  female  26.0      0   \n",
+       "3       Futrelle, Mrs. Jacques Heath (Lily May Peel)  female  35.0      1   \n",
+       "4                           Allen, Mr. William Henry    male  35.0      0   \n",
+       "\n",
+       "   Parch            Ticket     Fare Cabin Embarked  \n",
+       "0      0         A/5 21171   7.2500   NaN        S  \n",
+       "1      0          PC 17599  71.2833   C85        C  \n",
+       "2      0  STON/O2. 3101282   7.9250   NaN        S  \n",
+       "3      0            113803  53.1000  C123        S  \n",
+       "4      0            373450   8.0500   NaN        S  "
+      ]
+     },
+     "execution_count": 4,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "train.head()"
+   ]
   }
  ],
  "metadata": {
@@ -271,14 +469,14 @@
   },
   "papermill": {
    "default_parameters": {},
-   "duration": 4.8951,
-   "end_time": "2026-05-19T12:52:53.670518+00:00",
+   "duration": 4.886155,
+   "end_time": "2026-05-19T12:56:59.880883+00:00",
    "environment_variables": {},
    "exception": null,
    "input_path": "__notebook__.ipynb",
    "output_path": "__notebook__.ipynb",
    "parameters": {},
-   "start_time": "2026-05-19T12:52:48.775418+00:00",
+   "start_time": "2026-05-19T12:56:54.994728+00:00",
    "version": "2.7.0"
   }
  },
